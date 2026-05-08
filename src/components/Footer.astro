@@ -1,0 +1,51 @@
+---
+import Logo from "./Logo.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-divider)] bg-[var(--color-bg-primary)]">
+  <div class="container-tailor py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      <div class="md:col-span-2">
+        <a href="/" class="flex items-center gap-3 mb-4 group" aria-label="Tailor App Studio — home">
+          <Logo size={40} />
+          <span class="text-lg font-bold tracking-tight group-hover:text-[var(--color-accent-bright)] transition-colors">Tailor App Studio</span>
+        </a>
+        <p class="text-[var(--color-text-secondary)] max-w-[36ch] leading-relaxed">
+          Applicazioni cucite su misura per il tuo business.
+          <span class="block mt-1 text-sm text-[var(--color-text-muted)]">Made in Sardegna.</span>
+        </p>
+      </div>
+
+      <nav aria-label="Sezioni" class="space-y-3">
+        <h3 class="text-sm uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-4">Sezioni</h3>
+        <ul class="space-y-2 text-[var(--color-text-secondary)]">
+          <li><a href="#modello" class="hover:text-white transition-colors">Modello</a></li>
+          <li><a href="#processo" class="hover:text-white transition-colors">Processo</a></li>
+          <li><a href="#valori" class="hover:text-white transition-colors">Valori</a></li>
+          <li><a href="#contatto" class="hover:text-white transition-colors">Contatti</a></li>
+        </ul>
+      </nav>
+
+      <div class="space-y-3">
+        <h3 class="text-sm uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-4">Contatti</h3>
+        <ul class="space-y-2 text-[var(--color-text-secondary)] text-sm">
+          <li><a href="mailto:tailorappstudio@gmail.com" class="hover:text-white transition-colors">tailorappstudio@gmail.com</a></li>
+          <li class="pt-2 text-xs text-[var(--color-text-muted)]">Sassari · Sardegna · Italia</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-[var(--color-divider)] pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-[var(--color-text-muted)]">
+      <div class="space-y-1">
+        <p>Angelo Casula · P.IVA 03034130900 · Sassari, Italia</p>
+        <p>© {year} Tailor App Studio. Tutti i diritti riservati.</p>
+      </div>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li><a href="/privacy" class="hover:text-white transition-colors">Privacy</a></li>
+        <li><a href="/termini" class="hover:text-white transition-colors">Termini e condizioni</a></li>
+        <li><a href="/cookie" class="hover:text-white transition-colors">Cookie</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

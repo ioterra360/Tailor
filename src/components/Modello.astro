@@ -1,0 +1,176 @@
+---
+const cards = [
+  {
+    eyebrow: "01",
+    title: "La tua app cresce con l'azienda.",
+    body:
+      "Progettiamo il software, lo mettiamo online e continuiamo a seguirlo. Aggiornamenti, correzioni, sicurezza e supporto sono compresi nell'abbonamento mensile, così non devi richiedere un preventivo per ogni modifica.",
+    img: "/img/modello-laptop-software.png",
+    imgAlt: "Laptop con UI software, wireframe e blueprint sartoriali fluttuanti",
+    side: "left",
+  },
+  {
+    eyebrow: "02",
+    title: "Niente investimento iniziale pesante.",
+    body:
+      "Per iniziare chiediamo una caparra pari a due mensilità. La scaliamo dalle prime fatture dopo la pubblicazione, così non blocchi un budget grosso prima ancora di vedere il software online.",
+    img: "/img/modello-ago-filo.png",
+    imgAlt: "Ago da sarto e filo blu su sfondo navy",
+    side: "right",
+  },
+  {
+    eyebrow: "03",
+    title: "Tecnologie sempre aggiornate, incluse nell'abbonamento.",
+    body:
+      "iOS, Android, normative GDPR, integrazioni con i tuoi sistemi: ce ne occupiamo noi. Tu pensi al tuo business, il software resta aggiornato, sicuro, in regola.",
+    img: "/img/modello-tablet-dashboard.png",
+    imgAlt: "Tablet con dashboard analytics e pattern sartoriali blueprint",
+    side: "left",
+  },
+];
+---
+
+<section id="modello" class="section-tailor section--light relative overflow-hidden">
+  <!-- DESKTOP master thread (wide aspect, hidden on mobile) -->
+  <svg
+    class="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+    viewBox="0 0 1600 2400"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      data-modello-master-thread
+      d="M 100 100
+         C 600 100, 900 600, 1500 600
+         C 900 600, 700 1200, 100 1200
+         C 700 1200, 900 1800, 1500 1800
+         C 900 1800, 700 2350, 100 2350"
+      fill="none"
+      stroke="#3B82F6"
+      stroke-width="6"
+      stroke-dasharray="18 12"
+      stroke-linecap="round"
+      opacity="0.55"
+    />
+    <g data-modello-master-needle opacity="0">
+      <circle cx="0" cy="0" r="36" fill="#60A5FA" opacity="0.28" />
+      <line x1="-50" y1="0" x2="50" y2="0" stroke="#F1F5F9" stroke-width="10" stroke-linecap="round" />
+      <line x1="-50" y1="0" x2="50" y2="0" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" />
+      <ellipse cx="-44" cy="0" rx="6" ry="4" fill="none" stroke="#475569" stroke-width="2.5" />
+      <polygon points="50,0 60,-4 66,0 60,4" fill="#F1F5F9" />
+      <circle cx="60" cy="0" r="5" fill="#FFFFFF" />
+    </g>
+  </svg>
+
+  <!-- MOBILE master thread (narrow aspect, sinuous vertical path with proportional needle) -->
+  <svg
+    class="absolute inset-0 w-full h-full pointer-events-none md:hidden"
+    viewBox="0 0 300 2400"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      data-modello-master-thread-mobile
+      d="M 50 80
+         C 50 350, 250 350, 250 600
+         S 50 850, 50 1100
+         S 250 1350, 250 1600
+         S 50 1850, 50 2100
+         S 250 2300, 250 2380"
+      fill="none"
+      stroke="#3B82F6"
+      stroke-width="5"
+      stroke-dasharray="16 10"
+      stroke-linecap="round"
+      opacity="0.55"
+    />
+    <g data-modello-master-needle-mobile opacity="0">
+      <circle cx="0" cy="0" r="22" fill="#60A5FA" opacity="0.28" />
+      <line x1="-30" y1="0" x2="30" y2="0" stroke="#F1F5F9" stroke-width="7" stroke-linecap="round" />
+      <line x1="-30" y1="0" x2="30" y2="0" stroke="#94A3B8" stroke-width="2.4" stroke-linecap="round" />
+      <ellipse cx="-26" cy="0" rx="4" ry="2.6" fill="none" stroke="#475569" stroke-width="1.8" />
+      <polygon points="30,0 38,-3 42,0 38,3" fill="#F1F5F9" />
+      <circle cx="38" cy="0" r="3.2" fill="#FFFFFF" />
+    </g>
+  </svg>
+
+  <div class="container-tailor relative">
+    <div class="max-w-[64ch] mb-12 md:mb-20">
+      <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-accent)] mb-4">Il modello</p>
+      <h2 data-modello-heading class="display-lg text-[var(--color-bg-primary)]">
+        Cosa c'è dentro l'abbonamento.
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-[var(--color-text-on-light)] leading-relaxed">
+        Sai da subito come funziona: un abbonamento mensile, un referente tecnico
+        e un piano di lavoro chiaro fin dal primo giorno.
+      </p>
+    </div>
+
+    <div class="space-y-16 md:space-y-28">
+      {cards.map((card) => (
+        <article
+          data-modello-card
+          class:list={[
+            "grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-16",
+            card.side === "right" && "lg:[&>*:first-child]:order-2",
+          ]}
+        >
+          <!-- IMAGE column -->
+          <div class="lg:col-span-7 relative">
+            <div class="relative aspect-[4/3] rounded-[28px] overflow-hidden bg-[var(--color-bg-primary)] shadow-[0_30px_80px_-20px_rgba(10,37,64,0.35)]">
+              <img
+                src={card.img}
+                alt={card.imgAlt}
+                class="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+              <!-- Stitching with needle that sews across the image -->
+              <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 600" preserveAspectRatio="none" aria-hidden="true">
+                <!-- Needle is rendered FIRST so the dashed thread sits in front of it -->
+                <g data-modello-needle opacity="0">
+                  <circle cx="0" cy="0" r="14" fill="#FFFFFF" opacity="0.25" />
+                  <line x1="-22" y1="0" x2="22" y2="0" stroke="#F1F5F9" stroke-width="4.5" stroke-linecap="round" />
+                  <line x1="-22" y1="0" x2="22" y2="0" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" />
+                  <ellipse cx="-19" cy="0" rx="3" ry="2" fill="none" stroke="#475569" stroke-width="1.2" />
+                  <polygon points="22,0 27,-1.8 31,0 27,1.8" fill="#FFFFFF" />
+                  <circle cx="27" cy="0" r="2.5" fill="#FFFFFF" />
+                </g>
+                <path
+                  data-modello-thread
+                  d={card.side === "left"
+                    ? "M -40 360 Q 220 240, 420 320 T 820 240"
+                    : "M 820 360 Q 580 220, 380 320 T -40 240"
+                  }
+                  fill="none"
+                  stroke="#3B82F6"
+                  stroke-width="3"
+                  stroke-dasharray="8 6"
+                  stroke-linecap="round"
+                  opacity="0.95"
+                />
+              </svg>
+              <!-- Eyebrow number floating on image -->
+              <div class="absolute top-6 left-6 lg:top-8 lg:left-8 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 text-white text-sm font-bold tracking-[0.15em]">
+                {card.eyebrow}
+              </div>
+            </div>
+          </div>
+
+          <!-- TEXT column -->
+          <div class="lg:col-span-5">
+            <div class="text-7xl md:text-8xl font-bold text-[var(--color-accent)]/15 leading-none mb-4">
+              {card.eyebrow}
+            </div>
+            <h3 class="display-md mb-6 text-balance text-[var(--color-bg-primary)]">
+              {card.title}
+            </h3>
+            <p class="text-lg text-[var(--color-text-on-light)] leading-relaxed">
+              {card.body}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

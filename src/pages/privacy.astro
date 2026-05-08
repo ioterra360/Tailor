@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base
+  title="Privacy Policy · Tailor App Studio"
+  description="Informativa privacy ai sensi del GDPR per il sito tailorappstudio.it."
+>
+  <Header />
+  <main id="main" class="pt-32 pb-16">
+    <article class="container-tailor max-w-3xl prose-content">
+      <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-accent-bright)] mb-4">Informativa</p>
+      <h1 class="display-lg mb-8">Privacy Policy</h1>
+      <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">
+        Ultimo aggiornamento: 8 maggio 2026
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Titolare del trattamento</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Angelo Casula — ditta individuale, Viale Italia 53/A, 07100 Sassari (SS), Italia.<br />
+        P.IVA 03034130900.<br />
+        Email: <a href="mailto:tailorappstudio@gmail.com" class="underline hover:text-white">tailorappstudio@gmail.com</a>
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Quali dati raccogliamo</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Quando compili il modulo di contatto raccogliamo: nome e cognome, indirizzo email,
+        eventuale azienda e il messaggio che ci invii. Non raccogliamo altri dati personali.
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Perché li trattiamo</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Per rispondere alla tua richiesta e gestire l'eventuale rapporto contrattuale conseguente.
+        Base giuridica: art. 6.1 lett. b) GDPR (esecuzione di misure precontrattuali) e
+        lett. f) GDPR (legittimo interesse a rispondere).
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Conservazione</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Conserviamo i tuoi dati per il tempo necessario a rispondere alla tua richiesta e per i
+        successivi 24 mesi a fini contabili e amministrativi, salvo obblighi di legge.
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Sub-responsabili (data processor)</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Per gestire l'invio del modulo e il funzionamento del sito ci avvaliamo di:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-[var(--color-text-secondary)] mt-3 leading-relaxed">
+        <li><strong class="text-white">Formspree</strong> (USA) — gestione invio modulo, processor con DPA standard.</li>
+        <li><strong class="text-white">Cloudflare</strong> (USA/EU) — hosting, CDN e Web Analytics privacy-first.</li>
+        <li><strong class="text-white">IONOS</strong> (Germania) — gestione dominio e caselle email.</li>
+      </ul>
+
+      <h2 class="display-md mt-12 mb-4">I tuoi diritti</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Puoi in qualsiasi momento accedere ai tuoi dati, chiederne la rettifica, la cancellazione,
+        la limitazione del trattamento, oppure opporti. Puoi anche presentare reclamo al Garante
+        per la protezione dei dati personali (<a href="https://www.garanteprivacy.it" class="underline hover:text-white">garanteprivacy.it</a>).
+        Per esercitare i tuoi diritti, scrivici a tailorappstudio@gmail.com.
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Cookie</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Questo sito non utilizza cookie di profilazione. Per il dettaglio vedi la
+        <a href="/cookie" class="underline hover:text-white">Cookie Policy</a>.
+      </p>
+    </article>
+  </main>
+  <Footer />
+</Base>

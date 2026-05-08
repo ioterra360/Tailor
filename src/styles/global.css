@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+/* ---------- Tailor App Studio · Design System ---------- */
+@theme {
+  /* Palette */
+  --color-bg-primary: #0A2540;
+  --color-bg-secondary: #0F2D52;
+  --color-bg-tertiary: #143360;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B8C7D9;
+  --color-text-muted: #7E92AB;
+  --color-accent: #3B82F6;
+  --color-accent-bright: #60A5FA;
+  --color-divider: #1E3A5F;
+
+  /* Light theme tokens (for white sections) */
+  --color-bg-light: #FFFFFF;
+  --color-bg-light-soft: #F5F7FA;
+  --color-text-on-light: #4A5568;
+  --color-text-on-light-strong: #0A2540;
+  --color-light-border: #E1E7EF;
+
+  /* Tipografia */
+  --font-sans: "Sora", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Easing */
+  --ease-tailor: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html.has-lenis {
+    /* Lenis disabilita il smooth scroll nativo */
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-text-primary);
+  }
+
+  /* Headings */
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Reduced motion: disabilita tutte le transizioni */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---------- Utility custom ---------- */
+@layer utilities {
+  .container-tailor {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .section-tailor {
+    padding-block: clamp(6rem, 12vh, 10rem);
+  }
+
+  /* Headline display: clamp typografico fluid */
+  .display-xl {
+    font-size: clamp(2.75rem, 6vw + 1rem, 5.5rem);
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .display-lg {
+    font-size: clamp(2rem, 4vw + 1rem, 3.75rem);
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+
+  .display-md {
+    font-size: clamp(1.5rem, 2.5vw + 1rem, 2.25rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  /* Reveal helper (GSAP target di base) */
+  .reveal {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+
+  /* Backdrop blur header */
+  .header-backdrop {
+    background-color: color-mix(in srgb, var(--color-bg-primary) 70%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+  }
+
+  /* ---------- Light section variant ---------- */
+  .section--light {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-on-light);
+  }
+
+  .section--light h1,
+  .section--light h2,
+  .section--light h3,
+  .section--light h4 {
+    color: var(--color-text-on-light-strong);
+  }
+
+  .section--light-soft {
+    background-color: var(--color-bg-light-soft);
+    color: var(--color-text-on-light);
+  }
+}

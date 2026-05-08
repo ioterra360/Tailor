@@ -1,0 +1,224 @@
+---
+const benefits = [
+  {
+    n: "01",
+    title: "Recuperi ore ogni giorno",
+    body: "Automatizziamo le operazioni ripetitive che oggi rubano tempo al tuo staff: preventivi, email di follow-up, gestione ordini, generazione documenti. Ore liberate per il lavoro che conta.",
+  },
+  {
+    n: "02",
+    title: "Decidi sui numeri reali",
+    body: "Meno file sparsi e più dati sotto controllo. Fatturato, magazzino, ordini o attività del team diventano consultabili da un unico posto, anche dal telefono.",
+  },
+  {
+    n: "03",
+    title: "Meno errori, meno problemi",
+    body: "I processi digitalizzati eliminano gli errori di trascrizione e i passaggi manuali che ti costano ore di lavoro, clienti scontenti, e refusi che costano caro.",
+  },
+  {
+    n: "04",
+    title: "Scali senza assumere",
+    body: "Quando il lavoro ripetitivo passa al software, il team respira. Puoi seguire più clienti senza ingolfare l'ufficio e senza trasformare ogni crescita in nuove assunzioni.",
+  },
+  {
+    n: "05",
+    title: "Offri un'esperienza premium ai tuoi clienti",
+    body: "I tuoi clienti finali interagiscono con te tramite un'app moderna, dedicata, che parla la lingua del tuo brand. Più fidelizzazione, più passaparola, più vendite.",
+  },
+  {
+    n: "06",
+    title: "Tutto sempre in regola",
+    body: "GDPR, fatturazione elettronica, normative settoriali, aggiornamenti tecnici di iOS e Android: ce ne occupiamo noi. Tu non rischi multe né interruzioni di servizio.",
+  },
+];
+---
+
+<section id="processo" class="section-tailor relative bg-[var(--color-bg-secondary)] overflow-hidden">
+  <!-- Glow background behind everything -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 pointer-events-none"
+    style="background: radial-gradient(ellipse at 50% 50%, rgba(59,130,246,0.10), transparent 60%);"
+  ></div>
+
+  <div class="container-tailor relative">
+    <div class="max-w-[64ch] mb-16 md:mb-24">
+      <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-accent-bright)] mb-4">Cosa cambia, in pratica</p>
+      <h2 data-timeline-heading class="display-lg">
+        Le ore risparmiate.<br/>I clienti soddisfatti.
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed">
+        Un'app fatta bene non serve a fare scena. Serve a togliere lavoro manuale,
+        ridurre gli errori e dare al tuo team strumenti più ordinati.
+        Ecco cosa può cambiare nella gestione di tutti i giorni.
+      </p>
+    </div>
+
+    <!-- Hero image: wide cinematic -->
+    <div class="mb-20 md:mb-28 rounded-[28px] overflow-hidden aspect-[16/8] relative shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)]" data-reveal>
+      <img
+        src="/img/processo-hero.png"
+        alt="Macchina da cucire vintage che cuce un filo verso uno smartphone con blueprint"
+        class="w-full h-full object-cover"
+        loading="lazy"
+        onerror="this.style.display='none'"
+      />
+      <!-- Animated thread + needle on top of hero image -->
+      <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1600 800" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          data-processo-hero-thread
+          d="M -20 600 C 300 400, 600 500, 900 350 S 1400 200, 1620 280"
+          fill="none"
+          stroke="#FFFFFF"
+          stroke-width="4"
+          stroke-dasharray="14 10"
+          stroke-linecap="round"
+          opacity="0.85"
+        />
+        <g data-processo-hero-needle opacity="0">
+          <circle cx="0" cy="0" r="22" fill="#FFFFFF" opacity="0.25" />
+          <line x1="-32" y1="0" x2="32" y2="0" stroke="#F1F5F9" stroke-width="6" stroke-linecap="round" />
+          <line x1="-32" y1="0" x2="32" y2="0" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+          <ellipse cx="-28" cy="0" rx="4" ry="2.6" fill="none" stroke="#475569" stroke-width="1.6" />
+          <polygon points="32,0 39,-2.6 44,0 39,2.6" fill="#FFFFFF" />
+          <circle cx="39" cy="0" r="3.2" fill="#FFFFFF" />
+        </g>
+      </svg>
+    </div>
+
+    <!-- Big cucitura: thick thread + large needle visible across the timeline -->
+    <div data-timeline class="relative pt-12 md:pt-20">
+      <!-- Mobile-only sinuous thread that connects the 6 benefits with elegant curves -->
+      <svg
+        class="absolute inset-0 w-full h-full pointer-events-none md:hidden"
+        viewBox="0 0 300 1800"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        style="z-index: 1;"
+      >
+        <!-- Background ghost trace (so users see where the path will sew) -->
+        <path
+          d="M 50 0
+             C 50 250, 250 250, 250 500
+             S 50 750, 50 1000
+             S 250 1250, 250 1500
+             S 50 1700, 50 1800"
+          stroke="#3B82F6"
+          stroke-width="2"
+          stroke-dasharray="3 18"
+          fill="none"
+          opacity="0.2"
+        />
+        <!-- Foreground animated thread (sinuous, leggiadra) -->
+        <path
+          data-timeline-mobile-path
+          d="M 50 0
+             C 50 250, 250 250, 250 500
+             S 50 750, 50 1000
+             S 250 1250, 250 1500
+             S 50 1700, 50 1800"
+          stroke="#60A5FA"
+          stroke-width="5"
+          stroke-dasharray="16 10"
+          stroke-linecap="round"
+          fill="none"
+          opacity="0.95"
+          style="filter: drop-shadow(0 0 12px rgba(96,165,250,0.55));"
+        />
+        <!-- Metallic silver needle following the sinuous thread -->
+        <g data-timeline-mobile-needle opacity="0">
+          <circle cx="0" cy="0" r="22" fill="#60A5FA" opacity="0.28" />
+          <line x1="-30" y1="0" x2="30" y2="0" stroke="#F1F5F9" stroke-width="7" stroke-linecap="round" />
+          <line x1="-30" y1="0" x2="30" y2="0" stroke="#94A3B8" stroke-width="2.4" stroke-linecap="round" />
+          <ellipse cx="-26" cy="0" rx="4" ry="2.6" fill="none" stroke="#475569" stroke-width="1.8" />
+          <polygon points="30,0 38,-3 42,0 38,3" fill="#F1F5F9" />
+          <circle cx="38" cy="0" r="3.2" fill="#FFFFFF" />
+        </g>
+      </svg>
+
+      <!-- The dominant thread that gets sewn as the user scrolls (desktop) -->
+      <svg
+        class="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+        viewBox="0 0 1200 1100"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        style="z-index: 1;"
+      >
+        <path
+          d="M 60 60
+             C 350 60, 350 240, 600 240
+             S 850 120, 1140 140
+             C 850 360, 850 540, 600 540
+             S 350 660, 60 680
+             C 350 720, 600 880, 900 900
+             S 1140 1060, 1140 1080"
+          stroke="#3B82F6"
+          stroke-width="3"
+          stroke-dasharray="2 14"
+          fill="none"
+          opacity="0.18"
+        />
+
+        <path
+          data-timeline-path
+          d="M 60 60
+             C 350 60, 350 240, 600 240
+             S 850 120, 1140 140
+             C 850 360, 850 540, 600 540
+             S 350 660, 60 680
+             C 350 720, 600 880, 900 900
+             S 1140 1060, 1140 1080"
+          stroke="#60A5FA"
+          stroke-width="5"
+          stroke-dasharray="14 8"
+          stroke-linecap="round"
+          fill="none"
+          opacity="0.95"
+          style="filter: drop-shadow(0 0 12px rgba(96,165,250,0.5));"
+        />
+
+        <g data-timeline-needle opacity="0">
+          <circle cx="0" cy="0" r="20" fill="#60A5FA" opacity="0.25" />
+          <line x1="-26" y1="0" x2="26" y2="0" stroke="#F1F5F9" stroke-width="6" stroke-linecap="round" />
+          <line x1="-26" y1="0" x2="26" y2="0" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" />
+          <ellipse cx="-22" cy="0" rx="3.5" ry="2.2" fill="none" stroke="#475569" stroke-width="1.4" />
+          <polygon points="26,0 32,-2.2 36,0 32,2.2" fill="#FFFFFF" />
+          <circle cx="32" cy="0" r="3" fill="#FFFFFF" />
+        </g>
+      </svg>
+
+      <ol class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16 relative" style="z-index: 2;">
+        {benefits.map((b) => (
+          <li
+            data-timeline-step
+            class="relative pl-9 border-l-2 border-[var(--color-divider)]"
+          >
+            <span
+              class="absolute -left-[14px] top-2 w-[24px] h-[24px] rounded-full bg-[var(--color-accent)] ring-[6px] ring-[var(--color-bg-secondary)] shadow-[0_0_30px_rgba(59,130,246,0.7)]"
+              aria-hidden="true"
+              data-timeline-dot
+            ></span>
+            <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-accent-bright)] mb-2 font-semibold">
+              Vantaggio {b.n}
+            </p>
+            <h3 class="display-md mb-3 text-balance">{b.title}</h3>
+            <p class="text-[var(--color-text-secondary)] leading-relaxed text-base">
+              {b.body}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <!-- Bridge to commercial process (lighter touch) -->
+    <div class="mt-24 md:mt-32 max-w-[64ch] text-[var(--color-text-secondary)]" data-reveal>
+      <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-text-muted)] mb-3">Come si parte</p>
+      <p class="text-lg leading-relaxed">
+        Tutto inizia con una <strong class="text-white">discovery call gratuita di 30 minuti</strong>:
+        ci racconti come funziona il tuo business, ti diciamo cosa possiamo fare. Se ci convinciamo a vicenda,
+        firmiamo, paghi una caparra di due mensilità e iniziamo a lavorare.
+        Il tuo abbonamento parte quando l'app è online.
+      </p>
+    </div>
+  </div>
+</section>

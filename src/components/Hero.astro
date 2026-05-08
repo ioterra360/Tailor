@@ -1,0 +1,118 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<section
+  id="hero"
+  data-hero
+  class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden"
+>
+  <!-- Subtle radial glow behind the T -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 pointer-events-none"
+    style="background: radial-gradient(ellipse at 50% 38%, rgba(59,130,246,0.22), transparent 62%);"
+  ></div>
+
+  <div class="container-tailor relative flex flex-col items-center text-center pt-20 pb-20 md:pt-32 md:pb-24">
+    <!-- LOGO + DECORATIONS -->
+    <div class="relative mb-4 md:mb-16" data-hero-logo-stage>
+      <!-- Animated stitching circles around the logo -->
+      <svg
+        class="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 400 400"
+        preserveAspectRatio="xMidYMid meet"
+        aria-hidden="true"
+        data-hero-stitches
+      >
+        <!-- Outer dashed circle (cucitura grande) -->
+        <circle
+          cx="200" cy="200" r="180"
+          fill="none"
+          stroke="#60A5FA"
+          stroke-width="1"
+          stroke-dasharray="6 6"
+          opacity="0.35"
+          data-hero-stitch="outer"
+        />
+        <!-- Inner dashed circle (cucitura piccola) -->
+        <circle
+          cx="200" cy="200" r="155"
+          fill="none"
+          stroke="#3B82F6"
+          stroke-width="1.5"
+          stroke-dasharray="4 5"
+          opacity="0.5"
+          data-hero-stitch="inner"
+        />
+        <!-- Diagonal threads (4 fili che cuciono dagli angoli verso il logo) -->
+        <line x1="20" y1="20" x2="120" y2="120" stroke="#60A5FA" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" data-hero-thread="tl" />
+        <line x1="380" y1="20" x2="280" y2="120" stroke="#60A5FA" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" data-hero-thread="tr" />
+        <line x1="20" y1="380" x2="120" y2="280" stroke="#60A5FA" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" data-hero-thread="bl" />
+        <line x1="380" y1="380" x2="280" y2="280" stroke="#60A5FA" stroke-width="1" stroke-dasharray="3 3" opacity="0.4" data-hero-thread="br" />
+        <!-- Real sewing needle that orbits around the logo -->
+        <g data-hero-needle opacity="0">
+          <circle cx="0" cy="0" r="14" fill="#60A5FA" opacity="0.3" />
+          <line x1="-18" y1="0" x2="18" y2="0" stroke="#F1F5F9" stroke-width="3.5" stroke-linecap="round" />
+          <line x1="-18" y1="0" x2="18" y2="0" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round" />
+          <ellipse cx="-15" cy="0" rx="2.5" ry="1.6" fill="none" stroke="#475569" stroke-width="1" />
+          <polygon points="18,0 22.5,-1.5 26,0 22.5,1.5" fill="#FFFFFF" />
+          <circle cx="22.5" cy="0" r="2" fill="#FFFFFF" />
+        </g>
+      </svg>
+
+      <!-- Real logo PNG centered (responsive sizes, no inline style overflow) -->
+      <div class="relative w-[200px] h-[200px] md:w-[340px] md:h-[340px] flex items-center justify-center" data-hero-logo>
+        <img
+          src="/logo-tailor.png"
+          alt="Tailor App Studio logo"
+          class="w-[150px] h-[150px] md:w-[280px] md:h-[280px] object-contain drop-shadow-[0_8px_32px_rgba(59,130,246,0.4)]"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+    <h1 data-hero-headline class="display-xl max-w-[20ch]">
+      App e software
+      <span class="block text-[var(--color-accent-bright)]">fatti su misura</span>
+      per la tua azienda.
+    </h1>
+
+    <p
+      data-hero-sub
+      class="mt-8 max-w-[44ch] text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed"
+    >
+      Un abbonamento mensile chiaro, con sviluppo e manutenzione inclusi.
+      <span class="block mt-1 text-base md:text-lg text-[var(--color-text-muted)]">Made in Sardegna.</span>
+    </p>
+
+    <div data-hero-cta class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+      <a
+        href="#contatto"
+        class="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-[var(--color-bg-primary)] font-semibold transition-all hover:bg-[var(--color-text-secondary)] hover:scale-[1.02]"
+      >
+        Scrivici
+        <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+      </a>
+      <a
+        href="#modello"
+        class="text-sm text-[var(--color-text-secondary)] hover:text-white transition-colors underline-offset-4 hover:underline"
+      >
+        Scopri come lavoriamo
+      </a>
+    </div>
+
+    <a
+      data-hero-scrollhint
+      href="#modello"
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-white transition-colors"
+      aria-label="Scorri verso il basso"
+    >
+      <span>Scorri</span>
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M8 1V19M8 19L1 13M8 19L15 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </div>
+</section>

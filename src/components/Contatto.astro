@@ -1,0 +1,113 @@
+---
+// Replace with the user's real Formspree endpoint when available.
+// Until then the form posts to a placeholder that returns a friendly error,
+// keeping the page testable in dev.
+const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? "https://formspree.io/f/YOUR_FORM_ID";
+---
+
+<section id="contatto" class="section-tailor relative bg-[var(--color-bg-secondary)]">
+  <div class="container-tailor max-w-3xl">
+    <div class="text-center mb-12 md:mb-16">
+      <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-accent-bright)] mb-4">Iniziamo</p>
+      <h2 data-reveal class="display-lg text-balance">
+        Vuoi ottimizzare il tuo business?
+      </h2>
+      <p data-reveal class="mt-6 text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-[48ch] mx-auto">
+        Scrivici. Risposta entro 24 ore lavorative.
+        <span class="block mt-1 text-base text-[var(--color-text-muted)]">Discovery call gratuita di 30 minuti, senza impegno.</span>
+      </p>
+    </div>
+
+    <form
+      data-reveal
+      action={formspreeEndpoint}
+      method="POST"
+      class="space-y-5"
+      aria-label="Modulo contatto Tailor App Studio"
+    >
+      <!-- Honeypot anti-bot -->
+      <input
+        type="text"
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+        class="absolute left-[-9999px]"
+        aria-hidden="true"
+      />
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label for="name" class="block text-sm font-medium mb-2">
+            Nome e cognome <span class="text-[var(--color-accent-bright)]">*</span>
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            class="w-full rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-divider)] px-4 py-3 text-base text-white placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent transition"
+            placeholder="Mario Rossi"
+          />
+        </div>
+        <div>
+          <label for="company" class="block text-sm font-medium mb-2">
+            Azienda
+          </label>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            autocomplete="organization"
+            class="w-full rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-divider)] px-4 py-3 text-base text-white placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent transition"
+            placeholder="Nome azienda"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium mb-2">
+          Email <span class="text-[var(--color-accent-bright)]">*</span>
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          class="w-full rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-divider)] px-4 py-3 text-base text-white placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent transition"
+          placeholder="mario@azienda.it"
+        />
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium mb-2">
+          Cosa vorresti automatizzare o digitalizzare? <span class="text-[var(--color-accent-bright)]">*</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          minlength="20"
+          maxlength="2000"
+          class="w-full rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-divider)] px-4 py-3 text-base text-white placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent transition resize-none"
+          placeholder="Es. Gestiamo preventivi e ordini a mano tra Excel e WhatsApp: vorrei un gestionale unico, condiviso col team."
+        ></textarea>
+      </div>
+
+      <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
+        Inviando il modulo accetti la nostra <a href="/privacy" class="underline hover:text-white transition-colors">Privacy Policy</a>.
+        I tuoi dati saranno usati solo per ricontattarti.
+      </p>
+
+      <button
+        type="submit"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-[var(--color-bg-primary)] font-semibold text-base hover:bg-[var(--color-text-secondary)] hover:scale-[1.01] transition-all"
+      >
+        Invia messaggio
+        <span aria-hidden="true">→</span>
+      </button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+---
+const valori = [
+  { letter: "S", title: "Sicurezza", body: "I tuoi dati e quelli dei tuoi clienti, sempre protetti. Architetture moderne, GDPR-compliant per design.", img: "/img/valori-sicurezza.png", alt: "Smartphone con lucchetto cucito di filo blu" },
+  { letter: "I", title: "Innovazione", body: "Tecnologie aggiornate, intelligenza artificiale come strumento. Niente scorciatoie sulle cose che contano.", img: "/img/valori-innovazione.png", alt: "Smartphone con AI brain cucito da filo blu" },
+  { letter: "A", title: "Affidabilità", body: "SLA scritto, manutenzione inclusa, presenza costante. Sappiamo che il tuo business non si ferma.", img: "/img/valori-affidabilita.png", alt: "Macchina da cucire vintage che ripara un filo blu" },
+  { letter: "M", title: "Modularità", body: "Software che cresce con te. Nuove funzionalità si aggiungono senza rompere quelle esistenti.", img: "/img/valori-modularita.png", alt: "Smartphone con moduli LEGO blu cuciti insieme" },
+];
+---
+
+<section id="valori" class="section-tailor section--light relative">
+  <div class="container-tailor">
+    <div class="max-w-[64ch] mb-16 md:mb-24">
+      <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-accent)] mb-4">I nostri valori</p>
+      <h2 data-valori-heading class="display-lg">
+        I quattro fili che cuciamo.
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-[var(--color-text-on-light)] leading-relaxed">
+        Lavoriamo dalla Sardegna con un metodo semplice: poche promesse, mantenute.
+        Questi sono i principi che portiamo in ogni progetto.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      {valori.map((v) => (
+        <article
+          data-valore-card
+          class="group relative rounded-2xl border border-[var(--color-light-border)] bg-white p-6 lg:p-8 overflow-hidden hover:border-[var(--color-accent)] hover:shadow-[0_20px_60px_-15px_rgba(10,37,64,0.12)] transition-all"
+        >
+          <div class="flex flex-col sm:flex-row gap-6 items-start">
+            <div class="relative shrink-0 w-full sm:w-32 aspect-square rounded-xl bg-gradient-to-br from-[var(--color-bg-primary)] to-[var(--color-accent)]/40 overflow-hidden">
+              <img
+                src={v.img}
+                alt={v.alt}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+              <!-- Stitching overlay: filo che cuce la lettera del valore -->
+              <svg viewBox="0 0 80 80" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+                <path
+                  data-valore-filo
+                  d="M 12 64 Q 22 8 40 40 T 68 16"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  stroke-width="2.2"
+                  stroke-dasharray="3 3"
+                  stroke-linecap="round"
+                  opacity="0.85"
+                />
+                <text
+                  x="40" y="58"
+                  text-anchor="middle"
+                  font-size="44"
+                  font-weight="700"
+                  fill="#FFFFFF"
+                  font-family="Sora, sans-serif"
+                  opacity="0.95"
+                >{v.letter}</text>
+                <!-- Mini needle that sews along the thread -->
+                <g data-valore-needle opacity="0">
+                  <line x1="-5" y1="0" x2="5" y2="0" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" />
+                  <ellipse cx="-4" cy="0" rx="0.9" ry="0.6" fill="none" stroke="#94A3B8" stroke-width="0.4" />
+                  <polygon points="5,0 7,-0.7 8.5,0 7,0.7" fill="#FFFFFF" />
+                </g>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h3 class="display-md mb-3">{v.title}</h3>
+              <p class="text-[var(--color-text-on-light)] leading-relaxed">
+                {v.body}
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

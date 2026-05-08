@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base
+  title="Cookie Policy · Tailor App Studio"
+  description="Informativa sui cookie utilizzati dal sito tailorappstudio.it."
+>
+  <Header />
+  <main id="main" class="pt-32 pb-16">
+    <article class="container-tailor max-w-3xl">
+      <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-accent-bright)] mb-4">Informativa</p>
+      <h1 class="display-lg mb-8">Cookie Policy</h1>
+      <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">
+        Ultimo aggiornamento: 8 maggio 2026
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Sintesi</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Questo sito <strong class="text-white">non utilizza cookie di profilazione, marketing o di terze parti</strong>.
+        Utilizziamo solo strumenti privacy-first che non richiedono il banner di consenso.
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Cookie tecnici</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Utilizziamo solo cookie strettamente necessari al funzionamento del sito (nessuna profilazione).
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Strumenti utilizzati</h2>
+      <ul class="list-disc pl-6 space-y-3 text-[var(--color-text-secondary)] mt-3 leading-relaxed">
+        <li>
+          <strong class="text-white">Cloudflare Web Analytics</strong> — analisi anonime e aggregate
+          delle visite, senza cookie di tracciamento, senza fingerprinting, senza dati personali.
+        </li>
+        <li>
+          <strong class="text-white">Cloudflare Turnstile</strong> — sistema anti-bot privacy-first
+          per il modulo contatti, alternativa a reCAPTCHA. Non profila gli utenti.
+        </li>
+      </ul>
+
+      <h2 class="display-md mt-12 mb-4">Disabilitare i cookie</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Puoi gestire le impostazioni dei cookie dal tuo browser. La disabilitazione dei cookie
+        tecnici può limitare il funzionamento del sito.
+      </p>
+    </article>
+  </main>
+  <Footer />
+</Base>

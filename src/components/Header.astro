@@ -1,0 +1,34 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<header
+  data-header
+  class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300"
+>
+  <div class="container-tailor flex items-center justify-between py-4">
+    <a href="/" class="flex items-center gap-3" aria-label="Tailor App Studio — home">
+      <Logo size={36} />
+      <span class="text-base font-bold tracking-tight hidden sm:inline">Tailor App Studio</span>
+    </a>
+
+    <nav aria-label="Sezioni del sito" class="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--color-text-secondary)]">
+      <a href="#modello" class="hover:text-white transition-colors">Modello</a>
+      <a href="#processo" class="hover:text-white transition-colors">Processo</a>
+      <a href="#valori" class="hover:text-white transition-colors">Valori</a>
+      <a
+        href="#contatto"
+        class="px-4 py-2 rounded-full bg-white text-[var(--color-bg-primary)] hover:bg-[var(--color-text-secondary)] transition-colors"
+      >
+        Contattaci
+      </a>
+    </nav>
+
+    <a
+      href="#contatto"
+      class="md:hidden px-3 py-1.5 text-sm rounded-full bg-white text-[var(--color-bg-primary)]"
+    >
+      Contattaci
+    </a>
+  </div>
+</header>
