@@ -1,8 +1,7 @@
 ---
-// Replace with the user's real Formspree endpoint when available.
-// Until then the form posts to a placeholder that returns a friendly error,
-// keeping the page testable in dev.
-const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? "https://formspree.io/f/YOUR_FORM_ID";
+// Email diretto: il submit apre il client mail dell'utente con i campi
+// pre-compilati. Niente servizio esterno, niente env var, funziona subito.
+const TARGET_EMAIL = "tailorappstudio@gmail.com";
 ---
 
 <section id="contatto" class="section-tailor relative bg-[var(--color-bg-secondary)]">
@@ -20,10 +19,11 @@ const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? "https://
 
     <form
       data-reveal
-      action={formspreeEndpoint}
-      method="POST"
+      data-contatto-form
+      data-target-email={TARGET_EMAIL}
       class="space-y-5"
       aria-label="Modulo contatto Tailor App Studio"
+      novalidate
     >
       <!-- Honeypot anti-bot -->
       <input
@@ -108,6 +108,58 @@ const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? "https://
         Invia messaggio
         <span aria-hidden="true">→</span>
       </button>
+
+      <p data-contatto-fallback class="hidden text-sm text-[var(--color-text-secondary)] leading-relaxed">
+        Se il client email non si apre, scrivici direttamente a
+        <a href={`mailto:${TARGET_EMAIL}`} class="text-white underline hover:text-[var(--color-accent-bright)]">{TARGET_EMAIL}</a>.
+      </p>
     </form>
   </div>
 </section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contatto-form]");
+  if (form) {
+    const target = form.dataset.targetEmail || "tailorappstudio@gmail.com";
+    const fallback = form.querySelector<HTMLElement>("[data-contatto-fallback]");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      // Honeypot: se compilato, è un bot. Esci silenziosamente.
+      const honey = (form.querySelector("[name=_gotcha]") as HTMLInputElement | null)?.value;
+      if (honey) return;
+
+      // Validazione manuale (form ha novalidate)
+      if (!form.reportValidity()) return;
+
+      const fd = new FormData(form);
+      const name = (fd.get("name") || "").toString().trim();
+      const company = (fd.get("company") || "").toString().trim();
+      const email = (fd.get("email") || "").toString().trim();
+      const message = (fd.get("message") || "").toString().trim();
+
+      const subject = `Richiesta da ${name}${company ? ` (${company})` : ""} — Tailor App Studio`;
+
+      const bodyLines = [
+        `Nome: ${name}`,
+        company ? `Azienda: ${company}` : null,
+        `Email: ${email}`,
+        "",
+        "Messaggio:",
+        message,
+      ].filter(Boolean);
+
+      const body = bodyLines.join("\n");
+      const href = `mailto:${target}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      // Apre il client email
+      window.location.href = href;
+
+      // Mostra il fallback dopo 1.5s nel caso il client non si apra
+      setTimeout(() => {
+        fallback?.classList.remove("hidden");
+      }, 1500);
+    });
+  }
+</script>
