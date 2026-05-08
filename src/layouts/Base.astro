@@ -53,7 +53,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="theme-color" content="#0A2540" />
 
     <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="any" href="/logo-tailor.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/logo-tailor.png" />
+    <link rel="shortcut icon" href="/logo-tailor.png" />
 
     <!-- Schema.org Organization -->
     <script type="application/ld+json" set:html={JSON.stringify({
