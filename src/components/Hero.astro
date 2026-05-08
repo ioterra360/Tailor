@@ -5,7 +5,7 @@ import Logo from "./Logo.astro";
 <section
   id="hero"
   data-hero
-  class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden"
+  class="relative min-h-[100svh] flex flex-col overflow-hidden"
 >
   <!-- Subtle radial glow behind the T -->
   <div
@@ -14,7 +14,7 @@ import Logo from "./Logo.astro";
     style="background: radial-gradient(ellipse at 50% 38%, rgba(59,130,246,0.22), transparent 62%);"
   ></div>
 
-  <div class="container-tailor relative flex flex-col items-center text-center pt-12 pb-8 md:pt-20 md:pb-16 pt-safe">
+  <div class="container-tailor relative flex-1 flex flex-col items-center text-center pt-10 pb-8 md:pt-20 md:pb-16 pt-safe pb-safe">
     <!-- LOGO + DECORATIONS -->
     <div class="relative mb-3 md:mb-8" data-hero-logo-stage>
       <!-- Animated stitching circles around the logo -->
@@ -86,7 +86,7 @@ import Logo from "./Logo.astro";
       Un abbonamento mensile chiaro, con sviluppo e manutenzione inclusi.
     </p>
 
-    <div data-hero-cta class="mt-5 md:mt-7 flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+    <div data-hero-cta class="mt-auto pt-8 md:pt-10 flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
       <a
         href="#contatto"
         class="group inline-flex items-center gap-2 px-7 py-3 rounded-full bg-white text-[var(--color-bg-primary)] font-semibold transition-all hover:bg-[var(--color-text-secondary)] hover:scale-[1.02]"
