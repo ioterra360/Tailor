@@ -14,7 +14,7 @@ import Logo from "./Logo.astro";
     style="background: radial-gradient(ellipse at 50% 38%, rgba(59,130,246,0.22), transparent 62%);"
   ></div>
 
-  <div class="container-tailor relative flex flex-col items-center text-center pt-20 pb-20 md:pt-32 md:pb-24">
+  <div class="container-tailor relative flex flex-col items-center text-center pt-20 pb-20 md:pt-32 md:pb-24 pt-safe">
     <!-- LOGO + DECORATIONS -->
     <div class="relative mb-4 md:mb-16" data-hero-logo-stage>
       <!-- Animated stitching circles around the logo -->
@@ -105,7 +105,7 @@ import Logo from "./Logo.astro";
     <a
       data-hero-scrollhint
       href="#modello"
-      class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-white transition-colors"
+      class="absolute bottom-[max(2rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-white transition-colors"
       aria-label="Scorri verso il basso"
     >
       <span>Scorri</span>

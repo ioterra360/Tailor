@@ -82,10 +82,21 @@
     max-width: 1280px;
     margin-inline: auto;
     padding-inline: clamp(1.5rem, 4vw, 3rem);
+    /* Safe area orizzontale per iPhone in landscape (notch/dynamic island) */
+    padding-left: max(clamp(1.5rem, 4vw, 3rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1.5rem, 4vw, 3rem), env(safe-area-inset-right));
   }
 
   .section-tailor {
     padding-block: clamp(6rem, 12vh, 10rem);
+  }
+
+  /* Safe area utilities per iPhone moderni (Dynamic Island, home indicator) */
+  .pt-safe {
+    padding-top: max(1.25rem, env(safe-area-inset-top));
+  }
+  .pb-safe {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
   }
 
   /* Headline display: clamp typografico fluid */
