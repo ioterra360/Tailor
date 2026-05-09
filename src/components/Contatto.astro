@@ -1,7 +1,10 @@
 ---
-// Email diretto: il submit apre il client mail dell'utente con i campi
-// pre-compilati. Niente servizio esterno, niente env var, funziona subito.
+// FormSubmit: invio reale via POST a https://formsubmit.co/<email>
+// Prima submit dopo il deploy → FormSubmit invia email di conferma a TARGET_EMAIL.
+// Cliccare il link "Activate Form" nell'email per attivare l'endpoint definitivamente.
 const TARGET_EMAIL = "tailorappstudio@gmail.com";
+const FORM_ACTION = `https://formsubmit.co/${TARGET_EMAIL}`;
+const NEXT_URL = "https://tailorappstudio.it/grazie";
 ---
 
 <section id="contatto" class="section-tailor relative bg-[var(--color-bg-secondary)]">
@@ -19,16 +22,22 @@ const TARGET_EMAIL = "tailorappstudio@gmail.com";
 
     <form
       data-reveal
-      data-contatto-form
-      data-target-email={TARGET_EMAIL}
+      action={FORM_ACTION}
+      method="POST"
       class="space-y-5"
       aria-label="Modulo contatto Tailor App Studio"
-      novalidate
     >
-      <!-- Honeypot anti-bot -->
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="Nuova richiesta — Tailor App Studio" />
+      <input type="hidden" name="_next" value={NEXT_URL} />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_autoresponse" value="Ciao, abbiamo ricevuto la tua richiesta. Ti ricontattiamo entro 24 ore lavorative via email o telefono. — Tailor App Studio" />
+
+      <!-- Honeypot anti-bot (FormSubmit standard) -->
       <input
         type="text"
-        name="_gotcha"
+        name="_honey"
         tabindex="-1"
         autocomplete="off"
         class="absolute left-[-9999px]"
@@ -65,19 +74,37 @@ const TARGET_EMAIL = "tailorappstudio@gmail.com";
         </div>
       </div>
 
-      <div>
-        <label for="email" class="block text-sm font-medium mb-2">
-          Email <span class="text-[var(--color-accent-bright)]">*</span>
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autocomplete="email"
-          class="w-full rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-divider)] px-4 py-3 text-base text-white placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent transition"
-          placeholder="mario@azienda.it"
-        />
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label for="email" class="block text-sm font-medium mb-2">
+            Email <span class="text-[var(--color-accent-bright)]">*</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            class="w-full rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-divider)] px-4 py-3 text-base text-white placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent transition"
+            placeholder="mario@azienda.it"
+          />
+        </div>
+        <div>
+          <label for="phone" class="block text-sm font-medium mb-2">
+            Telefono <span class="text-[var(--color-accent-bright)]">*</span>
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            autocomplete="tel"
+            inputmode="tel"
+            pattern="[+0-9\s().\-]{6,20}"
+            class="w-full rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-divider)] px-4 py-3 text-base text-white placeholder:text-[var(--color-text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent transition"
+            placeholder="+39 333 1234567"
+          />
+        </div>
       </div>
 
       <div>
@@ -98,7 +125,7 @@ const TARGET_EMAIL = "tailorappstudio@gmail.com";
 
       <p class="text-xs text-[var(--color-text-muted)] leading-relaxed">
         Inviando il modulo accetti la nostra <a href="/privacy" class="underline hover:text-white transition-colors">Privacy Policy</a>.
-        I tuoi dati saranno usati solo per ricontattarti.
+        I tuoi dati saranno usati solo per ricontattarti via email o telefono.
       </p>
 
       <button
@@ -108,58 +135,6 @@ const TARGET_EMAIL = "tailorappstudio@gmail.com";
         Invia messaggio
         <span aria-hidden="true">→</span>
       </button>
-
-      <p data-contatto-fallback class="hidden text-sm text-[var(--color-text-secondary)] leading-relaxed">
-        Se il client email non si apre, scrivici direttamente a
-        <a href={`mailto:${TARGET_EMAIL}`} class="text-white underline hover:text-[var(--color-accent-bright)]">{TARGET_EMAIL}</a>.
-      </p>
     </form>
   </div>
 </section>
-
-<script>
-  const form = document.querySelector<HTMLFormElement>("[data-contatto-form]");
-  if (form) {
-    const target = form.dataset.targetEmail || "tailorappstudio@gmail.com";
-    const fallback = form.querySelector<HTMLElement>("[data-contatto-fallback]");
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
-      // Honeypot: se compilato, è un bot. Esci silenziosamente.
-      const honey = (form.querySelector("[name=_gotcha]") as HTMLInputElement | null)?.value;
-      if (honey) return;
-
-      // Validazione manuale (form ha novalidate)
-      if (!form.reportValidity()) return;
-
-      const fd = new FormData(form);
-      const name = (fd.get("name") || "").toString().trim();
-      const company = (fd.get("company") || "").toString().trim();
-      const email = (fd.get("email") || "").toString().trim();
-      const message = (fd.get("message") || "").toString().trim();
-
-      const subject = `Richiesta da ${name}${company ? ` (${company})` : ""} — Tailor App Studio`;
-
-      const bodyLines = [
-        `Nome: ${name}`,
-        company ? `Azienda: ${company}` : null,
-        `Email: ${email}`,
-        "",
-        "Messaggio:",
-        message,
-      ].filter(Boolean);
-
-      const body = bodyLines.join("\n");
-      const href = `mailto:${target}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-      // Apre il client email
-      window.location.href = href;
-
-      // Mostra il fallback dopo 1.5s nel caso il client non si apra
-      setTimeout(() => {
-        fallback?.classList.remove("hidden");
-      }, 1500);
-    });
-  }
-</script>
