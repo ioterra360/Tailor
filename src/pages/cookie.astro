@@ -14,38 +14,82 @@ import Footer from "../components/Footer.astro";
       <p class="text-sm uppercase tracking-[0.25em] text-[var(--color-accent-bright)] mb-4">Informativa</p>
       <h1 class="display-lg mb-8">Cookie Policy</h1>
       <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8">
-        Ultimo aggiornamento: 8 maggio 2026
+        Ultimo aggiornamento: 9 maggio 2026
       </p>
 
       <h2 class="display-md mt-12 mb-4">Sintesi</h2>
       <p class="text-[var(--color-text-secondary)] leading-relaxed">
-        Questo sito <strong class="text-white">non utilizza cookie di profilazione, marketing o di terze parti</strong>.
-        Utilizziamo solo strumenti privacy-first che non richiedono il banner di consenso.
+        Questo sito <strong class="text-white">non utilizza cookie di profilazione, marketing o pubblicitari</strong>.
+        Non sono presenti tracker di terze parti (Google Analytics, Meta Pixel, ecc.).
+        Al primo accesso ti chiediamo comunque il consenso tramite banner per trasparenza.
       </p>
 
-      <h2 class="display-md mt-12 mb-4">Cookie tecnici</h2>
+      <h2 class="display-md mt-12 mb-4">Cookie tecnici (sempre attivi)</h2>
       <p class="text-[var(--color-text-secondary)] leading-relaxed">
-        Utilizziamo solo cookie strettamente necessari al funzionamento del sito (nessuna profilazione).
+        Memorizziamo localmente nel tuo browser (<em>localStorage</em>) la tua scelta sul banner cookie,
+        in modo da non mostrartelo a ogni visita. Si tratta di un dato strettamente necessario, non condiviso
+        con nessuno, e non richiede consenso.
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-[var(--color-text-secondary)] mt-3 leading-relaxed">
+        <li><strong class="text-white">tailor-cookie-consent-v1</strong> — la tua scelta sul banner cookie. Persistente nel browser.</li>
+      </ul>
+
+      <h2 class="display-md mt-12 mb-4">Misurazioni anonime (con consenso)</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Al momento <strong class="text-white">non sono attivi strumenti di analytics</strong>. Se in futuro
+        attiveremo misurazioni di traffico useremo solo soluzioni anonime e privacy-first
+        (es. Cloudflare Web Analytics, Plausible) e ne attiveremo il caricamento solo dopo il tuo consenso
+        esplicito tramite il banner.
       </p>
 
-      <h2 class="display-md mt-12 mb-4">Strumenti utilizzati</h2>
+      <h2 class="display-md mt-12 mb-4">Servizi di terze parti utilizzati</h2>
       <ul class="list-disc pl-6 space-y-3 text-[var(--color-text-secondary)] mt-3 leading-relaxed">
         <li>
-          <strong class="text-white">Cloudflare Web Analytics</strong> — analisi anonime e aggregate
-          delle visite, senza cookie di tracciamento, senza fingerprinting, senza dati personali.
+          <strong class="text-white">FormSubmit</strong> — gestisce l'invio del modulo contatti.
+          Si attiva <em>solo</em> nel momento in cui clicchi "Invia messaggio". Non setta cookie sul nostro
+          dominio. Per la loro privacy policy: <a href="https://formsubmit.co/privacy" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent-bright)] hover:text-white transition-colors underline">formsubmit.co/privacy</a>.
         </li>
         <li>
-          <strong class="text-white">Cloudflare Turnstile</strong> — sistema anti-bot privacy-first
-          per il modulo contatti, alternativa a reCAPTCHA. Non profila gli utenti.
+          <strong class="text-white">GitHub Pages</strong> — hosting statico del sito. Può raccogliere
+          dati di log standard (indirizzo IP, user agent) per finalità di sicurezza e funzionamento del servizio.
+        </li>
+        <li>
+          <strong class="text-white">Google Fonts</strong> — caricamento del font Sora dai server di Google.
+          Non setta cookie. Le richieste dei caratteri possono includere il tuo indirizzo IP.
         </li>
       </ul>
 
-      <h2 class="display-md mt-12 mb-4">Disabilitare i cookie</h2>
+      <h2 class="display-md mt-12 mb-4">Modificare o revocare il consenso</h2>
       <p class="text-[var(--color-text-secondary)] leading-relaxed">
-        Puoi gestire le impostazioni dei cookie dal tuo browser. La disabilitazione dei cookie
-        tecnici può limitare il funzionamento del sito.
+        Puoi cambiare la tua scelta in qualsiasi momento cliccando su
+        <button
+          type="button"
+          data-cookie-manage
+          class="text-[var(--color-accent-bright)] underline hover:text-white transition-colors cursor-pointer"
+        >Gestisci cookie</button>
+        (anche disponibile nel footer di ogni pagina) oppure cancellando i dati di sito dal tuo browser.
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Anti-spam del modulo contatti</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Il modulo contatti utilizza la tecnica <em>honeypot</em>: un campo nascosto agli utenti reali ma
+        visibile ai bot. Non sono utilizzati CAPTCHA visivi né servizi che profilano l'utente.
+      </p>
+
+      <h2 class="display-md mt-12 mb-4">Contatti</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">
+        Per richieste sull'utilizzo dei cookie scrivi a
+        <a href="mailto:tailorappstudio@gmail.com" class="text-[var(--color-accent-bright)] hover:text-white transition-colors underline">tailorappstudio@gmail.com</a>.
       </p>
     </article>
   </main>
   <Footer />
 </Base>
+
+<script is:inline>
+  document.querySelectorAll("[data-cookie-manage]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      if (window.tailorCookieConsent) window.tailorCookieConsent.open();
+    });
+  });
+</script>

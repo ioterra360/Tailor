@@ -64,7 +64,24 @@ const year = new Date().getFullYear();
         <li><a href="/privacy" class="hover:text-white transition-colors">Privacy</a></li>
         <li><a href="/termini" class="hover:text-white transition-colors">Termini e condizioni</a></li>
         <li><a href="/cookie" class="hover:text-white transition-colors">Cookie</a></li>
+        <li>
+          <button
+            type="button"
+            data-cookie-manage
+            class="hover:text-white transition-colors cursor-pointer"
+          >
+            Gestisci cookie
+          </button>
+        </li>
       </ul>
     </div>
   </div>
 </footer>
+
+<script is:inline>
+  document.querySelectorAll("[data-cookie-manage]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      if (window.tailorCookieConsent) window.tailorCookieConsent.open();
+    });
+  });
+</script>
