@@ -3,7 +3,8 @@
 // Prima submit dopo il deploy → FormSubmit invia email di conferma a TARGET_EMAIL.
 // Cliccare il link "Activate Form" nell'email per attivare l'endpoint definitivamente.
 const TARGET_EMAIL = "tailorappstudio@gmail.com";
-const FORM_ACTION = `https://formsubmit.co/${TARGET_EMAIL}`;
+// Hash FormSubmit (sostituisce l'email naked → non esposta nel sorgente HTML)
+const FORM_ACTION = "https://formsubmit.co/1e29013bcba305bdb699eab4f33733f4";
 const NEXT_URL = "https://tailorappstudio.it/grazie";
 ---
 
