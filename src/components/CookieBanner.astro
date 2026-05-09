@@ -18,31 +18,29 @@
   <div class="cookie-banner__card">
     <div class="cookie-banner__glow" aria-hidden="true"></div>
     <div class="cookie-banner__content">
-      <div class="cookie-banner__header">
-        <div class="cookie-banner__icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <p id="cookie-banner-title" class="cookie-banner__title">
+        <span class="cookie-banner__cookie" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5 5.5 5.5 0 0 1-5.5-5.5A4 4 0 0 1 12 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
             <circle cx="9" cy="13" r="1.1" fill="currentColor"/>
             <circle cx="13.5" cy="16.5" r="1.1" fill="currentColor"/>
             <circle cx="15" cy="10" r="1" fill="currentColor"/>
             <circle cx="7.5" cy="9.5" r="0.9" fill="currentColor"/>
           </svg>
-        </div>
-        <div>
-          <p id="cookie-banner-title" class="cookie-banner__title">La tua privacy, le tue scelte</p>
-          <p id="cookie-banner-text" class="cookie-banner__body">
-            Usiamo cookie tecnici per far funzionare il sito. Con il tuo consenso possiamo attivare anche misurazioni anonime per migliorarlo. Nessuna profilazione, nessun tracker pubblicitario.
-          </p>
-          <a href="/cookie" class="cookie-banner__link">Leggi la Cookie Policy →</a>
-        </div>
-      </div>
+        </span>
+        Cookie su misura
+      </p>
+      <p id="cookie-banner-text" class="cookie-banner__body">
+        Solo i cookie che servono. Nessun tracker.
+        <a href="/cookie" class="cookie-banner__link">Dettagli</a>
+      </p>
 
       <div class="cookie-banner__actions" role="group" aria-label="Scelta consenso cookie">
         <button type="button" data-cookie-action="essential" class="cookie-banner__btn cookie-banner__btn--ghost">
           Solo necessari
         </button>
         <button type="button" data-cookie-action="all" class="cookie-banner__btn cookie-banner__btn--primary">
-          Accetta tutti
+          Accetta
         </button>
       </div>
     </div>
@@ -134,9 +132,9 @@
   .cookie-banner__card {
     position: relative;
     width: 100%;
-    max-width: 480px;
-    border-radius: 18px;
-    padding: 1.25rem 1.35rem 1.1rem;
+    max-width: 380px;
+    border-radius: 16px;
+    padding: 0.95rem 1.05rem 0.95rem;
     color: var(--color-text-primary);
     background: linear-gradient(
       150deg,
@@ -173,12 +171,12 @@
 
   .cookie-banner__glow {
     position: absolute;
-    inset: -40% -20% auto auto;
-    width: 240px;
-    height: 240px;
+    inset: -50% -30% auto auto;
+    width: 200px;
+    height: 200px;
     background: radial-gradient(
       circle at center,
-      color-mix(in srgb, var(--color-accent-bright) 30%, transparent) 0%,
+      color-mix(in srgb, var(--color-accent-bright) 28%, transparent) 0%,
       transparent 65%
     );
     filter: blur(20px);
@@ -189,65 +187,67 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-  }
-
-  .cookie-banner__header {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.875rem;
-    align-items: start;
-  }
-
-  .cookie-banner__icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-accent-bright);
-    background: color-mix(in srgb, var(--color-accent) 16%, transparent);
-    border: 1px solid color-mix(in srgb, var(--color-accent-bright) 28%, transparent);
-    flex-shrink: 0;
+    gap: 0.75rem;
   }
 
   .cookie-banner__title {
-    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 1rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
-    margin: 0 0 0.25rem;
+    letter-spacing: -0.015em;
+    margin: 0;
     color: var(--color-text-primary);
   }
 
+  .cookie-banner__cookie {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    color: var(--color-accent-bright);
+    background: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent-bright) 30%, transparent);
+    flex-shrink: 0;
+    transform: rotate(-6deg);
+    transition: transform 400ms var(--ease-tailor);
+  }
+
+  #cookie-banner.is-visible .cookie-banner__cookie {
+    transform: rotate(0deg);
+  }
+
   .cookie-banner__body {
-    font-size: 0.85rem;
-    line-height: 1.55;
+    font-size: 0.82rem;
+    line-height: 1.5;
     color: var(--color-text-secondary);
     margin: 0;
   }
 
   .cookie-banner__link {
-    display: inline-block;
-    margin-top: 0.45rem;
-    font-size: 0.82rem;
+    display: inline;
+    margin-left: 0.25rem;
     font-weight: 600;
     color: var(--color-accent-bright);
     text-decoration: none;
-    transition: color 200ms var(--ease-tailor);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent-bright) 40%, transparent);
+    transition: color 200ms var(--ease-tailor), border-color 200ms var(--ease-tailor);
   }
 
   .cookie-banner__link:hover,
   .cookie-banner__link:focus-visible {
     color: var(--color-text-primary);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    border-bottom-color: var(--color-text-primary);
   }
 
   .cookie-banner__actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    margin-top: 0.15rem;
   }
 
   .cookie-banner__btn {
@@ -256,9 +256,9 @@
     cursor: pointer;
     font-family: inherit;
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 0.82rem;
     letter-spacing: 0.01em;
-    padding: 0.7rem 1rem;
+    padding: 0.55rem 1.1rem;
     border-radius: 999px;
     transition:
       transform 220ms var(--ease-tailor),
@@ -311,23 +311,27 @@
     transform: translateY(0);
   }
 
-  /* Mobile: full-width bottom sheet */
+  /* Mobile: full-width bottom sheet compatto */
   @media (max-width: 640px) {
     #cookie-banner {
-      padding: 0.75rem;
-      padding-left: max(0.75rem, env(safe-area-inset-left));
-      padding-right: max(0.75rem, env(safe-area-inset-right));
-      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+      padding: 0.65rem;
+      padding-left: max(0.65rem, env(safe-area-inset-left));
+      padding-right: max(0.65rem, env(safe-area-inset-right));
+      padding-bottom: max(0.65rem, env(safe-area-inset-bottom));
       justify-content: stretch;
     }
 
     .cookie-banner__card {
       max-width: none;
-      padding: 1.05rem 1.05rem 0.95rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .cookie-banner__actions {
+      grid-template-columns: 1fr 1fr;
     }
 
     .cookie-banner__btn {
-      padding: 0.8rem 1rem;
+      padding: 0.65rem 0.9rem;
     }
   }
 
