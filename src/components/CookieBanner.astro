@@ -1,0 +1,298 @@
+---
+// Cookie Banner — informativo (sito usa solo cookie tecnici + analytics anonime).
+// Persiste l'acknowledgement in localStorage. Si nasconde finché non sappiamo lo stato.
+---
+
+<aside
+  id="cookie-banner"
+  role="dialog"
+  aria-live="polite"
+  aria-labelledby="cookie-banner-title"
+  aria-describedby="cookie-banner-text"
+  data-cookie-banner
+  hidden
+>
+  <div class="cookie-banner__card">
+    <div class="cookie-banner__glow" aria-hidden="true"></div>
+    <div class="cookie-banner__content">
+      <div class="cookie-banner__icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.5a9.5 9.5 0 1 0 9.5 9.5 5.5 5.5 0 0 1-5.5-5.5A4 4 0 0 1 12 2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <circle cx="9" cy="13" r="1.1" fill="currentColor"/>
+          <circle cx="13.5" cy="16.5" r="1.1" fill="currentColor"/>
+          <circle cx="15" cy="10" r="1" fill="currentColor"/>
+          <circle cx="7.5" cy="9.5" r="0.9" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="cookie-banner__text">
+        <p id="cookie-banner-title" class="cookie-banner__title">Cookie su questo sito</p>
+        <p id="cookie-banner-text" class="cookie-banner__body">
+          Usiamo solo cookie tecnici e analytics anonime <em>privacy-first</em>. Nessuna profilazione, nessun tracker di terze parti.
+          <a href="/cookie" class="cookie-banner__link">Cookie policy →</a>
+        </p>
+      </div>
+      <div class="cookie-banner__actions">
+        <button type="button" data-cookie-ack class="cookie-banner__btn">
+          <span>Ho capito</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script is:inline>
+  (function () {
+    var KEY = "tailor-cookie-ack-v1";
+    var banner = document.getElementById("cookie-banner");
+    if (!banner) return;
+
+    try {
+      if (localStorage.getItem(KEY) === "1") return;
+    } catch (e) { /* localStorage bloccato → mostra comunque */ }
+
+    banner.hidden = false;
+    // Forza reflow prima di applicare la classe per innescare la transizione
+    void banner.offsetWidth;
+    requestAnimationFrame(function () {
+      banner.classList.add("is-visible");
+    });
+
+    function dismiss() {
+      banner.classList.remove("is-visible");
+      banner.classList.add("is-leaving");
+      try { localStorage.setItem(KEY, "1"); } catch (e) {}
+      var done = function () {
+        banner.hidden = true;
+        banner.removeEventListener("transitionend", done);
+      };
+      banner.addEventListener("transitionend", done);
+      // Fallback se transitionend non scatta
+      setTimeout(done, 600);
+    }
+
+    var btn = banner.querySelector("[data-cookie-ack]");
+    if (btn) btn.addEventListener("click", dismiss);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !banner.hidden) dismiss();
+    });
+  })();
+</script>
+
+<style>
+  #cookie-banner {
+    position: fixed;
+    z-index: 80;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+  }
+
+  .cookie-banner__card {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    border-radius: 18px;
+    padding: 1.125rem 1.25rem;
+    color: var(--color-text-primary);
+    background: linear-gradient(
+      150deg,
+      color-mix(in srgb, var(--color-bg-secondary) 92%, transparent) 0%,
+      color-mix(in srgb, var(--color-bg-tertiary) 92%, transparent) 100%
+    );
+    border: 1px solid color-mix(in srgb, var(--color-accent-bright) 22%, transparent);
+    box-shadow:
+      0 24px 60px -20px rgba(0, 0, 0, 0.55),
+      0 8px 24px -12px rgba(10, 37, 64, 0.6),
+      inset 0 1px 0 0 color-mix(in srgb, var(--color-accent-bright) 18%, transparent);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    pointer-events: auto;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition:
+      opacity 380ms var(--ease-tailor),
+      transform 480ms var(--ease-tailor);
+    will-change: opacity, transform;
+  }
+
+  #cookie-banner.is-visible .cookie-banner__card {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  #cookie-banner.is-leaving .cookie-banner__card {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  .cookie-banner__glow {
+    position: absolute;
+    inset: -40% -20% auto auto;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--color-accent-bright) 30%, transparent) 0%,
+      transparent 65%
+    );
+    filter: blur(20px);
+    pointer-events: none;
+  }
+
+  .cookie-banner__content {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon text"
+      "actions actions";
+    column-gap: 0.875rem;
+    row-gap: 0.875rem;
+    align-items: start;
+  }
+
+  .cookie-banner__icon {
+    grid-area: icon;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent-bright);
+    background: color-mix(in srgb, var(--color-accent) 16%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent-bright) 28%, transparent);
+    flex-shrink: 0;
+  }
+
+  .cookie-banner__text {
+    grid-area: text;
+    min-width: 0;
+  }
+
+  .cookie-banner__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.2rem;
+    color: var(--color-text-primary);
+  }
+
+  .cookie-banner__body {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .cookie-banner__body em {
+    font-style: italic;
+    color: var(--color-text-primary);
+  }
+
+  .cookie-banner__link {
+    display: inline-block;
+    margin-top: 0.35rem;
+    font-weight: 600;
+    color: var(--color-accent-bright);
+    text-decoration: none;
+    transition: color 200ms var(--ease-tailor);
+  }
+
+  .cookie-banner__link:hover,
+  .cookie-banner__link:focus-visible {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cookie-banner__actions {
+    grid-area: actions;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .cookie-banner__btn {
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    padding: 0.625rem 1.15rem;
+    border-radius: 999px;
+    color: var(--color-bg-primary);
+    background: linear-gradient(
+      135deg,
+      var(--color-accent-bright) 0%,
+      var(--color-accent) 100%
+    );
+    box-shadow:
+      0 8px 20px -6px color-mix(in srgb, var(--color-accent) 55%, transparent),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+    transition:
+      transform 220ms var(--ease-tailor),
+      box-shadow 220ms var(--ease-tailor),
+      filter 220ms var(--ease-tailor);
+  }
+
+  .cookie-banner__btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow:
+      0 12px 28px -6px color-mix(in srgb, var(--color-accent) 70%, transparent),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .cookie-banner__btn:focus-visible {
+    outline: 2px solid var(--color-accent-bright);
+    outline-offset: 3px;
+  }
+
+  .cookie-banner__btn:active {
+    transform: translateY(0);
+  }
+
+  /* Mobile: full-width bottom sheet */
+  @media (max-width: 640px) {
+    #cookie-banner {
+      padding: 0.75rem;
+      padding-left: max(0.75rem, env(safe-area-inset-left));
+      padding-right: max(0.75rem, env(safe-area-inset-right));
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+      justify-content: stretch;
+    }
+
+    .cookie-banner__card {
+      max-width: none;
+      padding: 1rem 1.05rem;
+    }
+
+    .cookie-banner__actions {
+      justify-content: stretch;
+    }
+
+    .cookie-banner__btn {
+      width: 100%;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cookie-banner__card {
+      transition: opacity 120ms linear;
+      transform: none !important;
+    }
+  }
+</style>
